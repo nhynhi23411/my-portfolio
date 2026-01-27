@@ -15,7 +15,7 @@ const ovo = Ovo({
 export const metadata = {
   title: "Nguyen Huynh Yen Nhi - AI Engineer",
   description:
-    "Eliana Jade is a frontend web developer based in London, UK. I am a self-taught developer with 10 years of experience in multiple companies like Microsoft, Tesla and Apple.",
+    "Portfolio of Nguyen Huynh Yen Nhi. A Research Assistant & AI Engineer specializing in interdisciplinary AI applications, Computer Vision, and Web Development.",
 };
 
 export default function RootLayout({ children }) {

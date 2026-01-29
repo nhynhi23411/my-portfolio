@@ -294,7 +294,8 @@ export default function AfasPage() {
                     Publication
                   </p>
                   <p className="font-semibold">
-                    J. Inf. Commun. Converg. Eng. (JICCE)
+                    From Angel to Series-C: Assessing a Start-Up's Funding
+                    Opportunities
                   </p>
                   <p className="text-xs text-gray-500 italic">
                     Dec 2025 • Vol 16(1)
@@ -303,11 +304,13 @@ export default function AfasPage() {
 
                 <div className="pt-2">
                   <a
-                    href="#"
-                    className="flex items-center justify-center gap-2 w-full py-3 text-center bg-black text-white rounded-lg hover:bg-gray-800 transition group cursor-not-allowed opacity-80"
-                    title="Link coming soon"
+                    href="https://www.dbpia.co.kr/Journal/articleDetail?nodeId=NODE12293033"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 w-full py-3 text-center bg-black text-white rounded-lg hover:bg-gray-800 transition group"
+                    title="Read Full Manuscript on DBpia"
                   >
-                    <span>Read Manuscript</span>
+                    <span className="font-medium">Read Manuscript</span>
                     <img
                       src="/assets/right-arrow-bold.png"
                       alt=""

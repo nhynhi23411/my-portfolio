@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function About() {
-  // 1. Danh sách Tools - Giữ nguyên các công cụ kỹ thuật cốt lõi
+  // 1. Danh sách Tools - Giữ nguyên
   const tools = [
     { name: "Python", icon: "/assets/python.webp" },
     { name: "PyTorch", icon: "/assets/pytorch.png" },
@@ -11,7 +11,7 @@ export default function About() {
     { name: "VS Code", icon: "/assets/vscode.png" },
   ];
 
-  // 2. Thông tin tóm tắt - Tập trung vào kết quả và năng lực
+  // 2. Thông tin tóm tắt - ĐÃ THÊM GOOGLE SCHOLAR
   const infoData = [
     {
       title: "Core Expertise",
@@ -31,9 +31,16 @@ export default function About() {
       description: "E-Commerce Honors",
       sub: "GPA: 8.89/10",
     },
+    {
+      title: "Research",
+      icon: "/assets/edu-icon.png", // Bạn có thể thay bằng icon scholar nếu có
+      description: "Google Scholar",
+      sub: "View Publications",
+      link: "https://scholar.google.com/citations?user=iFUtThYAAAAJ&hl=vi",
+    },
   ];
 
-  // 3. Nhóm kỹ năng từ CV - Phân loại theo tư duy kỹ thuật
+  // 3. Nhóm kỹ năng - Giữ nguyên
   const skillsGroups = [
     {
       title: "Technical Foundation",
@@ -66,7 +73,6 @@ export default function About() {
       </div>
 
       <div className="flex flex-col lg:flex-row items-start gap-12 lg:gap-20">
-        {/* Cột Trái: Ảnh đại diện */}
         <div className="w-64 sm:w-72 mx-auto lg:mx-0 relative shrink-0 group">
           <div className="absolute inset-0 bg-gradient-to-tr from-transparent to-red-100 rounded-3xl -rotate-6 group-hover:rotate-0 transition duration-500"></div>
           <img
@@ -76,9 +82,7 @@ export default function About() {
           />
         </div>
 
-        {/* Cột Phải: Nội dung chính */}
         <div className="flex-1 w-full">
-          {/* --- ĐOẠN BIO NHẤN MẠNH TƯ DUY ĐA LĨNH VỰC --- */}
           <p className="mb-8 font-Ovo text-gray-600 dark:text-gray-300 leading-7 text-justify">
             I am an <strong>Interdisciplinary AI Engineer</strong> driven by a{" "}
             <strong>multi-domain mindset</strong>. My work lives at the
@@ -87,38 +91,42 @@ export default function About() {
             actionable intelligence. Whether it is optimizing sperm motility
             analysis through <strong>Computer Vision</strong> or decoding
             startup fundability using <strong>Explainable AI</strong>, my focus
-            remains on building transparent and reliable systems. I thrive on
-            bridging the gap between technical algorithms and real-world
-            utility, ensuring that innovation creates tangible impact across
-            diverse industries.
+            remains on building transparent and reliable systems.
           </p>
 
-          {/* 3 Thẻ Info Cards */}
-          <ul className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+          {/* 4 Thẻ Info Cards - Đã chỉnh lại Grid sang grid-cols-2 và lg:grid-cols-4 */}
+          <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             {infoData.map((item, index) => (
-              <li
-                key={index}
-                className="border border-gray-200 dark:border-white/20 rounded-xl p-4 hover:bg-gray-50 dark:hover:bg-white/5 transition duration-300 hover:shadow-sm text-center sm:text-left cursor-default"
-              >
-                <img
-                  src={item.icon}
-                  alt={item.title}
-                  className="w-6 h-6 mb-3 mx-auto sm:mx-0 dark:invert"
-                />
-                <h3 className="font-bold text-sm text-gray-800 dark:text-white">
-                  {item.title}
-                </h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  {item.description}
-                </p>
-                <p className="text-[10px] text-gray-400 dark:text-gray-500">
-                  {item.sub}
-                </p>
+              <li key={index} className="h-full">
+                <a
+                  href={item.link || "#"}
+                  target={item.link ? "_blank" : "_self"}
+                  rel="noopener noreferrer"
+                  className={`flex flex-col h-full border border-gray-200 dark:border-white/20 rounded-xl p-4 hover:bg-gray-50 dark:hover:bg-white/5 transition duration-300 hover:shadow-sm text-center sm:text-left ${
+                    item.link
+                      ? "cursor-pointer border-blue-100 dark:border-blue-900/30"
+                      : "cursor-default"
+                  }`}
+                >
+                  <img
+                    src={item.icon}
+                    alt={item.title}
+                    className="w-6 h-6 mb-3 mx-auto sm:mx-0 dark:invert"
+                  />
+                  <h3 className="font-bold text-sm text-gray-800 dark:text-white">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    {item.description}
+                  </p>
+                  <p className="text-[10px] text-blue-500 dark:text-blue-400 font-medium mt-auto italic">
+                    {item.sub}
+                  </p>
+                </a>
               </li>
             ))}
           </ul>
 
-          {/* Phần Skills */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
             {skillsGroups.map((group, idx) => (
               <div key={idx}>
@@ -139,7 +147,6 @@ export default function About() {
             ))}
           </div>
 
-          {/* Tools Row */}
           <div>
             <p className="text-sm font-semibold text-gray-500 mb-3">
               Tools & Frameworks:

@@ -5,7 +5,7 @@ export default function Awards() {
   const awards = [
     {
       title: "Second Prize - National Student Scientific Research Competition",
-      organization: "Ministry of Education and Training",
+      organization: "Ho Chi Minh Communist Youth Union (Central Committee)",
       year: "2025",
       icon: "/assets/second-price.png",
     },
@@ -32,6 +32,24 @@ export default function Awards() {
       organization: "Vietnam National University, Ho Chi Minh City",
       year: "2024-2025",
       icon: "/assets/cup.jpg",
+    },
+    {
+      title: "Best Paper Award - Talented Bachelor Student Research Conference",
+      organization: "University of Economics and Law (VNU-HCM)",
+      year: "2025",
+      icon: "/assets/best-paper.jpg",
+    },
+    {
+      title: "Top 5 - Southern Region, MIS Talent Competition",
+      organization: "MIS Talent 2026 Organizing Committee",
+      year: "2026",
+      icon: "/assets/top1.webp",
+    },
+    {
+      title: "Selected for Taiwan Experience Education Program (TEEP)",
+      organization: "Ministry of Education, Taiwan & Taipei Medical University",
+      year: "2026",
+      icon: "/assets/schoolarship.png",
     },
     {
       title: "Honorary Delegate",

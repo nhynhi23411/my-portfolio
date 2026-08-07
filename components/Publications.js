@@ -3,6 +3,22 @@ import React from "react";
 export default function Publications() {
   const papers = [
     {
+      title: "Beyond the pitch deck: How AI is redefining funding predictions",
+      authors:
+        "Nguyen-Huynh, N. Y., Pham, A., Le, Q. A., Le, M. N., Huynh, Q., & Trinh, V.",
+      venue:
+        "Journal of Information and Communication Convergence Engineering (JICCE), 24(2), 191–198",
+      link: "https://doi.org/10.56977/jicce.2026.24.2.191",
+      year: "2026",
+    },
+    {
+      title: "Reasoning startup profiles: Explainability in funding prediction",
+      authors: "Nguyen-Huynh, N. Y., Nguyen, Q. H., & Trinh, V.",
+      venue: "27th Asia Pacific Management Conference (APMC 2026)",
+      link: "#",
+      year: "2026",
+    },
+    {
       title: "Assessing sperm motility through a multi-modal correlation",
       authors:
         "Trinh, V., Nguyen-Huynh, N. Y., Bui-Quang, P., Huynh, Q., & Nguyen-Pham, Q. K.",

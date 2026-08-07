@@ -3,6 +3,31 @@ import React from "react";
 export default function Experience() {
   const experienceData = [
     {
+      company: "Taipei Medical University - College of Medicine (TEEP)",
+      role: "Visiting Research Intern, AI in Medical Imaging",
+      period: "Jul 2026 - Sep 2026",
+      location: "Taipei, Taiwan",
+      description: [
+        "Selected as 1 of 5 students nationwide for the Taiwan Experience Education Program (TEEP), sponsored by Taiwan's Ministry of Education and hosted by Taipei Medical University.",
+        "Conducting a research placement on \"Artificial Intelligence in Medical Imaging\" under Assoc. Prof. Nguyen Quoc Khanh Le.",
+        "Extending prior biomedical computer vision work (sperm motility tracking) into clinical imaging research within an international lab setting.",
+      ],
+      techStack: ["Medical Imaging", "AI Research", "Computer Vision"],
+      icon: "/assets/edu-icon.png",
+    },
+    {
+      company: "Tay Ninh Provincial People's Committee - UAV Ecosystem Task Force",
+      role: "Secretariat Member / Research Assistant",
+      period: "Apr 2026 - Present",
+      location: "Tay Ninh, Vietnam",
+      description: [
+        "Appointed under Decision No. 6929/QD-UBND to the Secretariat Team supporting Tay Ninh Province's Strategy for Developing the Unmanned Aerial Vehicle (UAV) Ecosystem (2026-2030, vision to 2035).",
+        "Provide research support translating data-driven analysis into policy recommendations for provincial technology planning.",
+      ],
+      techStack: ["Policy Research", "AI Strategy", "Data Analysis"],
+      icon: "/assets/edu-icon.png",
+    },
+    {
       company: "N2N AI Solution",
       role: "AI Engineer Intern",
       period: "Jan 2025 - Present",

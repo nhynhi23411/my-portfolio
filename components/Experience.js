@@ -8,7 +8,7 @@ export default function Experience() {
       period: "Jul 2026 - Sep 2026",
       location: "Taipei, Taiwan",
       description: [
-        "Selected as 1 of 5 students nationwide for the Taiwan Experience Education Program (TEEP), sponsored by Taiwan's Ministry of Education and hosted by Taipei Medical University.",
+        "Admitted to the Taiwan Experience Education Program (TEEP), sponsored by Taiwan's Ministry of Education and hosted by Taipei Medical University.",
         "Conducting a research placement on \"Artificial Intelligence in Medical Imaging\" under Assoc. Prof. Nguyen Quoc Khanh Le.",
         "Extending prior biomedical computer vision work (sperm motility tracking) into clinical imaging research within an international lab setting.",
       ],

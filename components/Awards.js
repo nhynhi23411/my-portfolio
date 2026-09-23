@@ -57,6 +57,12 @@ export default function Awards() {
       year: "2025",
       icon: "/assets/danhdu.webp",
     },
+    {
+      title: "Outstanding Student in Academic Award",
+      organization: "Student Talent Award, University of Economics and Law (VNU-HCM)",
+      year: "2025-2026",
+      icon: "/assets/best-paper.jpg",
+    },
   ];
 
   return (

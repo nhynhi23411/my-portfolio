@@ -38,6 +38,18 @@ export default function GynSurgPage() {
           underlying model.
         </p>
 
+        <div className="w-full mt-8 rounded-xl overflow-hidden border border-gray-200 dark:border-white/10 relative">
+          <img
+            src="/assets/gynsurg_cover_overlay.png"
+            alt="Real-time instrument segmentation overlay on laparoscopic video"
+            className="w-full h-auto object-cover"
+          />
+          <p className="text-center text-xs text-gray-500 mt-2 italic">
+            Live inference overlay from the trained segmentation model on a
+            real laparoscopic frame (grasper and sealer-divider classes).
+          </p>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mt-12">
           <div className="lg:col-span-2 space-y-12">
             <section>
@@ -93,6 +105,33 @@ export default function GynSurgPage() {
 
             <section>
               <h3 className="text-2xl font-bold mb-6 font-Ovo border-b pb-2">
+                Why Multi-Input Beats a Single Confidence Score
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                To justify the extra complexity, the multi-input fuzzy system
+                is compared against two simpler baselines on the same 4,992
+                held-out frames: a fixed threshold on the raw softmax
+                max-probability, and an adaptive system using only that one
+                signal. Combining all four signals raises mean error-detection
+                AUROC to 0.861, against 0.822 for the fixed threshold and
+                0.811 for the single-input adaptive version, consistently
+                across all four folds.
+              </p>
+              <div className="w-full bg-gray-50 rounded-xl overflow-hidden border border-gray-200 dark:border-white/10 dark:bg-white/5 p-2">
+                <img
+                  src="/assets/gynsurg_fuzzy_ablation.png"
+                  alt="Fixed vs adaptive single-input vs adaptive multi-input error-detection AUROC"
+                  className="w-full h-auto object-contain rounded-lg"
+                />
+                <p className="text-center text-sm text-gray-500 mt-2 italic">
+                  Figure 3: Error-detection AUROC by fold, fixed threshold vs.
+                  single-input vs. multi-input fuzzy reliability.
+                </p>
+              </div>
+            </section>
+
+            <section>
+              <h3 className="text-2xl font-bold mb-6 font-Ovo border-b pb-2">
                 Segmentation Backbone Accuracy
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -110,7 +149,7 @@ export default function GynSurgPage() {
                   className="w-full h-auto object-contain rounded-lg"
                 />
                 <p className="text-center text-sm text-gray-500 mt-2 italic">
-                  Figure 3: Four-fold mean mIoU across four candidate
+                  Figure 4: Four-fold mean mIoU across four candidate
                   backbones, with a 0.75 project target line.
                 </p>
               </div>
@@ -136,7 +175,7 @@ export default function GynSurgPage() {
                   className="w-full h-auto object-contain rounded-lg"
                 />
                 <p className="text-center text-sm text-gray-500 mt-2 italic">
-                  Figure 4: Observed pixel error rises smoothly as more
+                  Figure 5: Observed pixel error rises smoothly as more
                   (lower-reliability) predictions are retained.
                 </p>
               </div>

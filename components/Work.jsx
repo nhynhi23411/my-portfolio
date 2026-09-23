@@ -36,28 +36,12 @@ export default function Work() {
         "Multi-model segmentation (YOLO, DeepLabV3+, DINO) with an adaptive fuzzy reliability layer for gynecologic laparoscopic video.",
     },
     {
-      name: "B2BNet: Reliability-Aware Transfer",
-      id: "drugreliability",
-      icon: "/assets/b2b_pipeline.png",
-      description: "Cross-Scale Drug Response Prediction",
-      shortDesc:
-        "A reliability-audit framework that decides when frozen biological evidence should be suppressed to avoid negative transfer in drug-response models.",
-    },
-    {
       name: "Reporting-Aware Forecasting",
       id: "surveillance",
       icon: "/assets/surv_pipeline.png",
       description: "Disease Surveillance under Missing Data",
       shortDesc:
         "A four-state observation model and stress-testing protocol for forecasting disease counts from bulletins with structural non-reporting.",
-    },
-    {
-      name: "VLM Evidence Routing",
-      id: "vlmrouting",
-      icon: "/assets/vlm_primary_transfer.png",
-      description: "“Look Again or Answer Now?” for Medical VQA",
-      shortDesc:
-        "A paired-counterfactual evaluation of crop-and-reacquire routing across Qwen2.5-VL and MedGemma, isolating a controlled corruption-risk finding.",
     },
   ];
 

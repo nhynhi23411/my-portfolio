@@ -30,10 +30,10 @@ export default function Work() {
     {
       name: "GynSurg: Surgical Vision",
       id: "gynsurg",
-      icon: "/assets/gynsurg_visual.png",
-      description: "Laparoscopic Instrument & Anatomy Segmentation",
+      icon: "/assets/gynsurg_fuzzy_pipeline.png",
+      description: "Laparoscopic Instrument Segmentation Reliability",
       shortDesc:
-        "Multi-model segmentation (YOLO, DeepLabV3+, DINO) with an adaptive fuzzy reliability layer for gynecologic laparoscopic video.",
+        "A post-hoc adaptive fuzzy reliability layer on a frozen DeepLabV3+ segmentation model, scoring which laparoscopic instrument masks to trust.",
     },
     {
       name: "Reporting-Aware Forecasting",

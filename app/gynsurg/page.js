@@ -26,140 +26,125 @@ export default function GynSurgPage() {
           Computer Vision / Biomedical
         </span>
         <h1 className="text-4xl md:text-5xl font-bold mt-4 mb-6 font-Ovo">
-          GynSurg: Instrument & Anatomy Segmentation for Gynecologic
-          Laparoscopy
+          GynSurg: A Post-Hoc Fuzzy Reliability Layer for Laparoscopic
+          Instrument Segmentation
         </h1>
         <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed max-w-4xl">
-          A segmentation pipeline for laparoscopic gynecologic surgery video
-          that identifies surgical instruments and anatomical structures
-          frame-by-frame, then scores each prediction with an adaptive
-          multi-input fuzzy reliability layer instead of trusting a single
-          confidence score.
+          A segmentation model can output a mask and a confidence score, but a
+          single softmax number does not tell a surgeon whether that mask is
+          trustworthy. This project adds a fuzzy reasoning layer on top of a
+          frozen, already-trained segmentation model that scores every
+          prediction's reliability, without retraining or touching the
+          underlying model.
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mt-12">
           <div className="lg:col-span-2 space-y-12">
             <section>
               <h3 className="text-2xl font-bold mb-6 font-Ovo border-b pb-2">
-                Dataset Composition
+                Pipeline Overview
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                Training data combines the public CholecSeg8k benchmark with a
-                custom GynSurg corpus of instrument and anatomy frames pulled
-                from real laparoscopic video, grouped by source video to
-                prevent leakage across splits.
+                A laparoscopic frame goes through a frozen DeepLabV3+
+                (ResNet-50) segmentation model to produce a softmax output and
+                a hard mask. Instead of stopping there, that same output is
+                also passed through a post-hoc fuzzy layer that outputs a
+                Low / Medium / High reliability membership and a warning
+                overlay, with zero changes to the trained model itself.
               </p>
               <div className="w-full bg-gray-50 rounded-xl overflow-hidden border border-gray-200 dark:border-white/10 dark:bg-white/5 p-2">
                 <img
-                  src="/assets/gynsurg_dataset.png"
-                  alt="Dataset composition"
+                  src="/assets/gynsurg_fuzzy_pipeline.png"
+                  alt="Frozen segmentation model plus post-hoc fuzzy reliability layer"
                   className="w-full h-auto object-contain rounded-lg"
                 />
                 <p className="text-center text-sm text-gray-500 mt-2 italic">
-                  Figure 1: Instrument and anatomy frame composition across
-                  data sources.
+                  Figure 1: The trained model stays frozen; the fuzzy layer is
+                  entirely post-hoc.
                 </p>
               </div>
             </section>
 
             <section>
               <h3 className="text-2xl font-bold mb-6 font-Ovo border-b pb-2">
-                Model Registry & Class Distribution
+                Adaptive Multi-Input Fuzzy Inference
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                Four segmentation backbones — a YOLO-based detector, a
-                DeepLabV3+ decoder, and two DINO-backed encoders — are trained
-                under a shared interface so their outputs can be compared
-                directly against class frequency and video-level splits.
+                The reliability score is not a single threshold on
+                confidence. Four signals extracted from the frozen model's
+                own output, predicted object size, boundary sharpness,
+                prediction entropy, and max softmax probability, are fed
+                through learned Gaussian membership functions into an
+                81-rule Sugeno fuzzy inference system that estimates the
+                error risk of that specific prediction.
               </p>
               <div className="w-full bg-gray-50 rounded-xl overflow-hidden border border-gray-200 dark:border-white/10 dark:bg-white/5 p-2">
                 <img
-                  src="/assets/gynsurg_counts.png"
-                  alt="Instrument and anatomy class counts"
+                  src="/assets/gynsurg_fuzzy_architecture.png"
+                  alt="Adaptive multi-input fuzzy inference architecture"
                   className="w-full h-auto object-contain rounded-lg"
                 />
                 <p className="text-center text-sm text-gray-500 mt-2 italic">
-                  Figure 2: Per-class instrument and anatomy frame counts used
-                  for class-weighted loss.
+                  Figure 2: Four prediction-time signals feed an 81-rule
+                  Sugeno system that outputs an error-risk estimate.
                 </p>
               </div>
             </section>
 
             <section>
               <h3 className="text-2xl font-bold mb-6 font-Ovo border-b pb-2">
-                Adaptive Fuzzy Reliability Layer
+                Segmentation Backbone Accuracy
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                A single softmax score does not tell a surgeon whether a mask
-                is trustworthy. The reliability layer fuses multiple inputs —
-                per-model confidence, inter-model agreement, and temporal
-                consistency across adjacent frames — into a fuzzy reasoning
-                step that flags low-reliability predictions instead of
-                silently accepting them.
-              </p>
-              <div className="bg-orange-50 dark:bg-orange-900/10 border border-orange-200 dark:border-orange-900/30 p-5 rounded-xl">
-                <h5 className="font-bold text-orange-800 dark:text-orange-300 mb-2">
-                  Why fuzzy, not thresholding
-                </h5>
-                <ul className="list-disc ml-5 text-sm text-gray-700 dark:text-gray-300 space-y-1">
-                  <li>
-                    <strong>Multi-input:</strong> combines several imperfect
-                    reliability cues rather than a single hard threshold.
-                  </li>
-                  <li>
-                    <strong>Adaptive:</strong> the fusion weights adjust to the
-                    class and to the segmentation backbone in use.
-                  </li>
-                  <li>
-                    <strong>Actionable:</strong> low-reliability frames are
-                    surfaced for review rather than passed through silently.
-                  </li>
-                </ul>
-              </div>
-            </section>
-
-            <section>
-              <h3 className="text-2xl font-bold mb-6 font-Ovo border-b pb-2">
-                Training Protocol
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                Frames are grouped by source video before K-fold splitting so
-                no video appears in both train and validation. Training uses
-                mixed-precision (AMP), cosine warm-restart scheduling,
-                class-weighted combined loss (cross-entropy + Dice + focal),
-                and early stopping on validation mIoU, run on Modal's GPU
-                cloud.
+                Before adding the reliability layer, several segmentation
+                backbones were benchmarked under 4-fold cross-validation.
+                DeepLabV3+ (ResNet-50) was the strongest at 0.70 mean mIoU;
+                lighter backbones (SegFormer-B0, DeepLabV3+ EfficientNet-B0,
+                U-Net MobileNetV3) landed close behind at 0.67-0.68, within
+                the overlapping error bars shown below.
               </p>
               <div className="w-full bg-gray-50 rounded-xl overflow-hidden border border-gray-200 dark:border-white/10 dark:bg-white/5 p-2">
                 <img
-                  src="/assets/gynsurg_timeline.png"
-                  alt="Timeline of surgical actions"
+                  src="/assets/gynsurg_model_accuracy.png"
+                  alt="Four-fold mean mIoU across segmentation backbones"
                   className="w-full h-auto object-contain rounded-lg"
                 />
                 <p className="text-center text-sm text-gray-500 mt-2 italic">
-                  Figure 3: Timeline visualization of annotated surgical
-                  actions across a procedure.
+                  Figure 3: Four-fold mean mIoU across four candidate
+                  backbones, with a 0.75 project target line.
                 </p>
               </div>
             </section>
 
             <section>
               <h3 className="text-2xl font-bold mb-6 font-Ovo border-b pb-2">
-                Visual Results
+                What the Reliability Score Buys You
               </h3>
-              <div className="w-full bg-black rounded-xl overflow-hidden border border-gray-200">
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
+                The fuzzy score is only useful if it actually tracks real
+                error. Sorting predictions by their fuzzy reliability score
+                and looking at the pixel error of the frames you would keep
+                at each retention rate shows a clean risk-coverage
+                relationship: keeping only the top 50% most reliable
+                predictions cuts observed pixel error to 6.8%, versus 28.9%
+                if every prediction is accepted.
+              </p>
+              <div className="w-full bg-gray-50 rounded-xl overflow-hidden border border-gray-200 dark:border-white/10 dark:bg-white/5 p-2">
                 <img
-                  src="/assets/gynsurg_visual.png"
-                  alt="Instrument and anatomy segmentation overlay"
-                  className="w-full h-auto object-contain"
+                  src="/assets/gynsurg_risk_coverage.png"
+                  alt="Risk-coverage curve for the adaptive fuzzy selection"
+                  className="w-full h-auto object-contain rounded-lg"
                 />
+                <p className="text-center text-sm text-gray-500 mt-2 italic">
+                  Figure 4: Observed pixel error rises smoothly as more
+                  (lower-reliability) predictions are retained.
+                </p>
               </div>
-              <p className="text-gray-600 dark:text-gray-300 mt-4">
-                Across the four backbones, the goal is not the single largest
-                model: lightweight architectures reach mIoU close to the
-                heaviest baseline while running substantially faster and with
-                a much smaller footprint, which matters for eventual
-                in-theatre deployment.
+              <p className="text-gray-600 dark:text-gray-300 mt-4 text-sm">
+                In other words, the fuzzy layer's reliability score is a
+                usable selective-prediction signal: a surgeon or downstream
+                system can choose how much coverage to trade for how much
+                error, instead of accepting every mask at face value.
               </p>
             </section>
           </div>
@@ -181,7 +166,7 @@ export default function GynSurgPage() {
                     Tech Stack
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {["Python", "PyTorch", "YOLOv8", "DeepLabV3+", "DINO", "Modal GPU Cloud"].map(
+                    {["Python", "PyTorch", "DeepLabV3+", "Fuzzy Inference (Sugeno)", "Modal GPU Cloud"].map(
                       (t) => (
                         <span
                           key={t}
@@ -199,7 +184,7 @@ export default function GynSurgPage() {
                   </p>
                   <p className="font-semibold">Ongoing Research Project</p>
                   <p className="text-xs text-gray-500 italic">
-                    Instrument & anatomy segmentation, GynSurg lab
+                    Instrument segmentation reliability, GynSurg lab
                   </p>
                 </div>
               </div>

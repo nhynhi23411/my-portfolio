@@ -48,6 +48,12 @@ export default function Journey() {
       url: "https://plo.vn/kieng-ba-chan-tao-nen-tang-phat-trien-cho-truong-dai-hoc-kinh-te-luat-post892077.html",
       type: "News",
     },
+    {
+      title: "Đặc cách sinh viên xuất sắc",
+      publisher: "Báo Sài Gòn Giải Phóng, 18/9/2026",
+      url: "https://www.sggp.org.vn/bao-sai-gon-giai-phong-ngay-18092026-post872135.html",
+      type: "News",
+    },
   ];
 
   return (

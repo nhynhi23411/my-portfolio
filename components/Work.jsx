@@ -30,7 +30,7 @@ export default function Work() {
     {
       name: "GynSurg: Surgical Vision",
       id: "gynsurg",
-      icon: "/assets/gynsurg_cover_overlay.png",
+      icon: "/assets/gynsurg_fig3_qualitative.png",
       description: "Laparoscopic Instrument Segmentation Reliability",
       shortDesc:
         "A post-hoc adaptive fuzzy reliability layer on a frozen DeepLabV3+ segmentation model, scoring which laparoscopic instrument masks to trust.",

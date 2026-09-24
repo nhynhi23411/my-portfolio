@@ -271,9 +271,12 @@ export default function GynSurgPage() {
                   <p className="text-gray-500 text-xs uppercase tracking-wide mb-1">
                     Status
                   </p>
-                  <p className="font-semibold">Manuscript in Preparation</p>
+                  <p className="font-semibold">
+                    Accepted &mdash; Oral Presentation
+                  </p>
                   <p className="text-xs text-gray-500 italic">
-                    AIBioMed Lab, Taipei Medical University
+                    IEEE iFUZZY &amp; Fuzzy 2026, Taichung, Taiwan (Nov
+                    20&ndash;22, 2026)
                   </p>
                 </div>
               </div>

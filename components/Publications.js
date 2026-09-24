@@ -3,6 +3,24 @@ import React from "react";
 export default function Publications() {
   const papers = [
     {
+      title:
+        "Adaptive Multi-Input Fuzzy Reliability Reasoning for Trustworthy Surgical Instrument Segmentation",
+      authors: "Nguyen-Huynh, N. Y., Ly, K. N., & Le, N. Q. K.",
+      venue:
+        "IEEE iFUZZY & Fuzzy 2026, Taichung, Taiwan (Oral Presentation, Nov 20–22, 2026)",
+      link: "#",
+      year: "2026",
+    },
+    {
+      title:
+        "Standardizing ESG data and automating sustainability narratives: A multi-layer prompting approach",
+      authors:
+        "Le, H. S., Nguyen-Huynh, N. Y., Nguyen, D., Hoang, H. G. N., Tran, H. X., Luong, T., & Trinh, V.",
+      venue: "Asia Pacific Management Review (APMR)",
+      link: "#",
+      year: "2026",
+    },
+    {
       title: "Beyond the pitch deck: How AI is redefining funding predictions",
       authors:
         "Nguyen-Huynh, N. Y., Pham, A., Le, Q. A., Le, M. N., Huynh, Q., & Trinh, V.",
